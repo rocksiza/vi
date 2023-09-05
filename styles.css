@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: pink;
+}
+
+header, section, footer {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffb6c1; /* Light Pink */
+}
+
+h1, h2, h3 {
+    color: #ff69b4; /* Hot Pink */
+}
+
+.pokemon {
+    display: inline-block;
+    margin: 10px;
+    padding: 20px;
+    background-color: #ff69b4; /* Hot Pink */
+    cursor: pointer;
+}
