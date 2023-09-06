@@ -81,3 +81,12 @@ body {
     position: absolute;
     z-index: 1;
 }
+
+#header-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;  /* Adjust as needed */
+    height: auto;  /* Maintain aspect ratio */
+    z-index: 10;   /* Optional, to ensure it's on top */
+}
