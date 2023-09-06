@@ -1,100 +1,83 @@
-/* General styles for the body to include the tiled background */
+/* General Styles */
 body {
     background-image: url('https://media.discordapp.net/attachments/429983945786916884/1148692472818581575/unknown.png');
     background-repeat: repeat;
 }
-/* General styles for sections */
-.section-background {
-    position: absolute;  /* Absolute positioning */
-    top: 50%;  /* Center vertically */
-    left: 50%;  /* Center horizontally */
-    transform: translate(-50%, -50%);  /* Adjust for true centering */
-    object-fit: cover;  /* Cover the entire section */
-    width: 100%;  /* Full width */
-    height: 100%;  /* Full height */
-    z-index: -1;  /* Place it behind the content */
+
+/* Centered Div */
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
 }
 
-/* General styles for sections */
-#sanrio,
-#anime,
+/* Image Container */
+.image-container {
+    margin-top: 250px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* Pokémon Section */
 #pokemon {
-    position: relative;  /* Allows for absolute positioning within this div */
-    padding: 20px;  /* Padding inside the border */
-    margin: 20px 0;  /* Margin outside the border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
-/* Individual border colors for each section, if desired */
-#sanrio {
-    border-color: #ff0000;  /* Red border */
-}
-
-#anime {
-    border-color: #00ff00;  /* Green border */
-}
-
-/* #pokemon {
-    border-color: #0000ff;
-} */ 
-
-/* Style for Pokémon divs, if you're using them */
 .pokemon {
     display: inline-block;
     margin: 10px;
+    margin-top: 50px;
     cursor: pointer;
+    img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
-/* Styles for the parent container */
-.parent {
-    display: flex;  /* Use flexbox */
-    justify-content: center;  /* Center horizontally */
-    align-items: center;  /* Center vertically */
-    height: 100vh;  /* 100% of the viewport height, adjust as needed */
-}
-
-/* Styles for the div that acts as an image */
-.image-div {
-    background-image: url('path/to/your/image.png');  /* Replace with your image */
-    background-size: cover;  /* Cover the entire div */
-    background-position: center;  /* Center the background image */
-    background-repeat: no-repeat;  /* Do not repeat the image */
-    width: 300px;   /* Width of the image div, adjust as needed */
-    height: 300px;  /* Height of the image div, adjust as needed */
-}
-
-/* Centered div */
 .centered-div {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 300px;  /* You can adjust this */
+    top: 40%;  /* Move down by 10% */
+    position: relative;
 }
 
-/* Styles for the image container */
-.image-container {
-    margin-top: 20px;
+#pokedex-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 65%;  /* Move down by 10% from the original 50% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: none;  /* Initially hidden */
 }
 
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+/* New or modified styles */
+#pokedex-entry {
+    width: 400px;  /* Set the width explicitly */
+    height: auto;  /* Maintain aspect ratio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-/* Styles for Pokémon divs, if you're using them */
-#pokemon {
-    width: 300px;  /* You can adjust this */
-    height: 300px;  /* You can adjust this */
-}
-
-.pokemon {
-    display: inline-block;
-    margin: 10px;
-    cursor: pointer;
-}
-
-/* Style for the text box */
-.text-box {
-    padding: 20px;
+#pokedex-text {
+    margin: 25px;
     text-align: center;
+    position: absolute;
+    z-index: 1;
 }

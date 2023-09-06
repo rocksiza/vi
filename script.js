@@ -1,61 +1,68 @@
-// Array to store the names of caught Pokémon
-var caughtPokemon = [];
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM loaded");
+    fetchRandomPokemon();
 
-// Function to display random Pokémon sprites in the Pokémon World section
-async function displayPokemon() {
-    var pokemonSection = document.getElementById('pokemon');
-    pokemonSection.innerHTML = "";  // Clear previous Pokémon
+    document.addEventListener('click', event => {
+        console.log("Something clicked");
 
-    try {
-        // Fetch 4 random Pokémon
-        for (let i = 0; i < 4; i++) {
-            let randomId = Math.floor(Math.random() * 905) + 1;  // 1st generation Pokémon IDs range from 1 to 151
-            let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
-            let data = await response.json();
-
-            var pokemonDiv = document.createElement('div');
-            pokemonDiv.className = 'pokemon';
-
-            // Add Pokemon sprite
-            var pokemonSprite = document.createElement('img');
-            pokemonSprite.src = data.sprites.front_default;
-            pokemonSprite.alt = data.name;
-            pokemonSprite.style.width = '50px';
-            pokemonSprite.style.height = '50px';
-            pokemonDiv.appendChild(pokemonSprite);
-
-            // Add click event to catch the Pokémon
-            pokemonDiv.onclick = function() { catchPokemon(data.name); };
-            
-            // Append to the Pokémon World section
-            pokemonSection.appendChild(pokemonDiv);
+        let targetElement = event.target;
+        if (targetElement.tagName === 'IMG') {
+            targetElement = targetElement.parentElement;
         }
-    } catch (error) {
-        console.error('There was a problem fetching the Pokémon data:', error);
-    }
-}
 
-// Function to "catch" a clicked Pokémon
-function catchPokemon(pokemonName) {
-    if (!caughtPokemon.includes(pokemonName)) {
-        caughtPokemon.push(pokemonName);
-        updateCaughtList();
-    }
-}
-
-// Function to update the list of caught Pokémon
-function updateCaughtList() {
-    var caughtList = document.getElementById('caught-list');
-    caughtList.innerHTML = "";  // Clear previous list
-
-    caughtPokemon.forEach(function(pokemonName) {
-        var listItem = document.createElement('li');
-        listItem.innerHTML = pokemonName;
-        caughtList.appendChild(listItem);
+        if (targetElement.classList.contains('pokemon')) {
+            console.log("Pokemon clicked");
+            const pokemonId = targetElement.dataset.id;
+            fetchPokedexEntry(pokemonId);
+        } else {
+            console.log("Non-Pokemon clicked");
+            document.getElementById('pokedex-section').style.display = 'none';
+        }
     });
+});
+
+
+async function fetchRandomPokemon() {
+    console.log("Fetching random Pokemon");
+    const pokemonContainer = document.getElementById('pokemon');
+    
+    for (let i = 0; i < 4; i++) {
+        const randomId = Math.floor(Math.random() * 898) + 1;
+        const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const pokemonDiv = document.createElement('div');
+        pokemonDiv.className = 'pokemon';
+        pokemonDiv.dataset.id = randomId;
+
+        const pokemonImage = document.createElement('img');
+        pokemonImage.src = data.sprites.front_default;
+
+        pokemonDiv.appendChild(pokemonImage);
+        pokemonContainer.appendChild(pokemonDiv);
+
+        console.log(`Added Pokemon: ${randomId}`);
+    }
 }
 
-// Initialize the Pokémon display and caught list when the page loads
-window.onload = function() {
-    displayPokemon();
+async function fetchPokedexEntry(pokemonId) {
+    console.log("Fetching Pokédex entry...");
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
+    const response = await fetch(url);
+    const data = await response.json();
+    let pokedexText = data.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+
+    // Standardize the text formatting
+    pokedexText = pokedexText.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+
+    const pokedexSection = document.getElementById('pokedex-section');
+    const pokedexImage = document.getElementById('pokedex-entry');
+    const pokedexTextElement = document.getElementById('pokedex-text');
+
+    pokedexImage.src = 'https://www.nicepng.com/png/full/240-2406318_pokemon-text-box-pokmon.png';
+    pokedexTextElement.innerText = pokedexText;
+    
+    console.log("Showing Pokédex.");
+    pokedexSection.style.display = 'flex';
 }
