@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Your Girlfriend's Special Website</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <header>
         <h1>Welcome to Your Special Place!</h1>
     </header>
 
-    <section id="sanrio">
-        <h2>Sanrio Corner</h2>
-        <!-- Sanrio content here -->
-    </section>
+    <main>
+        <!-- Sanrio Corner -->
+        <div class="centered-div">
+            <div class="image-container">
+                <img src="https://cdn.discordapp.com/attachments/429983945786916884/1148765662429331486/cats-5888277_640.png" alt="Sanrio Image">
+            </div>
+        </div>
 
-    <section id="anime">
-        <h2>Anime Zone</h2>
-        <!-- Anime content here -->
-    </section>
+        <!-- Pokémon World -->
+        <div class="centered-div">
+            <div id="pokemon">
+                <!-- Pokémon will be dynamically added here -->
+            </div>
+        </div>
 
-    <section id="pokemon">
-        <h2>Pokémon World</h2>
-        <!-- Pokémon will be dynamically added here -->
-    </section>
-    <ul id="caught-list">
-        <!-- List of caught Pokémon -->
-    </ul>
+        <!-- Special Message -->
+        <div class="text-box">
+            <p>Your special message here.</p>
+        </div>
+
+        <ul id="caught-list">
+            <!-- List of caught Pokémon -->
+        </ul>
+    </main>
 
     <footer>
         <h3>Love, [Your Name]</h3>
     </footer>
 </body>
 </html>
+
